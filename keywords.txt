@@ -1,0 +1,51 @@
+#######################################
+# Syntax Map For DFRobot_IICSerial
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+DFRobot_IICSerial	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+begin	KEYWORD2
+write	KEYWORD2
+read	KEYWORD2
+flush	KEYWORD2
+available	KEYWORD2
+end	KEYWORD2
+peek	KEYWORD2
+
+#######################################
+# Instances (KEYWORD2)
+#######################################
+
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+eLineBreakOutput_t	LITERAL1
+eLineBreak	LITERAL1
+eNormal	LITERAL1
+eCommunicationMode_t	LITERAL1
+eIrDAMode	LITERAL1
+eNormalMode	LITERAL1
+SUBUART_CHANNEL_1	LITERAL1
+SUBUART_CHANNEL_2	LITERAL1
+SUBUART_CHANNEL_ALL	LITERAL1
+IICSERIAL_8N1	LITERAL1
+IICSERIAL_8N2	LITERAL1
+IICSERIAL_8Z1	LITERAL1
+IICSERIAL_8Z2	LITERAL1
+IICSERIALS_8O1	LITERAL1
+IICSERIAL_8O2	LITERAL1
+IICSERIAL_8E1	LITERAL1
+IICSERIAL_8E2	LITERAL1
+IICSERIAL_8F1	LITERAL1
+IICSERIAL_8F2	LITERAL1
+
+
