@@ -26,7 +26,7 @@ The band rate, word length, and check format of every sub UART can be set indepe
 
 ## Installation
 To use this library, first download the library file, then open the examples folder and run the demo in the folder Proceed as follows:
-* sudo git clone https://github.com/DFRobot/DFRobot_IIC_Serial
+* sudo git clone https://github.com/DFRobot/DFRobot_IICSerial
 * cd python
 * cd raspberrypi
 * cd examples
