@@ -3,7 +3,7 @@ This is an IIC to dual UART module with 1Mbps IIC transmission rate, and each su
 The band rate, word length, and check format of every sub UART can be set independently. The module can provide at most 2Mbps communication rate, and support 4 IIC addresses. Four such modules can be connected to one controller board to expand 8 hardware serial port. <br>
 
 <br>
-<img src="./resources/images/DFR0627svg.png">
+<img src="resources/images/DFR0627svg.png">
 <br>
 
 
