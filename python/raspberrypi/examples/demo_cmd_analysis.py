@@ -9,7 +9,7 @@ from __future__ import print_function
   # Receive the string, remove the char "A" of the string, and then print out the new string.
   #
   # @copyright   Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
-  # @licence     The MIT License (MIT)
+  # @license     The MIT License (MIT)
   # @author [Arya](xue.peng@dfrobot.com)
   # @version  V1.0
   # @date  2021-05-19
