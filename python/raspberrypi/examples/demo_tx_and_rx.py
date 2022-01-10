@@ -8,11 +8,10 @@ from __future__ import print_function
   # Experiment phenomenon: connect the TX to RX in Sub UART1 and UART2. Read the data sent by Sub UART and print it out.
   #
   # @copyright   Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
-  # @licence     The MIT License (MIT)
+  # @license     The MIT License (MIT)
   # @author [Arya](xue.peng@dfrobot.com)
   # @version  V1.0
   # @date  2021-05-17
-  # @get from https://www.dfrobot.com
   # @url https://github.com/DFRobot/DFRobot_IICSerial
 '''
 
@@ -23,13 +22,13 @@ import time
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 from DFRobot_IIC_Serial import *
 
-iic_uart1 = DFRobot_IIC_Serial(sub_uart_channel = SUBUART_CHANNEL_1, IA1 = 1, IA0 = 1) #using UART1 interface of IIC to dual uart moudle.
-iic_uart2 = DFRobot_IIC_Serial(sub_uart_channel = SUBUART_CHANNEL_2, IA1 = 1, IA0 = 1) #using UART2 interface of IIC to dual uart moudle.
+iic_uart1 = DFRobot_IIC_Serial(sub_uart_channel = DFRobot_IIC_Serial.SUBUART_CHANNEL_1, IA1 = 1, IA0 = 1) #using UART1 interface of IIC to dual uart moudle.
+iic_uart2 = DFRobot_IIC_Serial(sub_uart_channel = DFRobot_IIC_Serial.SUBUART_CHANNEL_2, IA1 = 1, IA0 = 1) #using UART2 interface of IIC to dual uart moudle.
 
 
 if __name__ == "__main__":
-  iic_uart1.begin(baud = 115200, format = IIC_Serial_8N1)
-  iic_uart2.begin(baud = 115200, format = IIC_Serial_8N1)
+  iic_uart1.begin(baud = 115200, format = iic_uart1.IIC_Serial_8N1)
+  iic_uart2.begin(baud = 115200, format = iic_uart1.IIC_Serial_8N1)
 
   print("\n+--------------------------------------------+")
   print("|  Connected UART1's TX pin to RX pin.       |")   #Connect pin TX and RX of UART1 

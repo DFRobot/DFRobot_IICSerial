@@ -3,7 +3,7 @@
  * @brief Define the basic structure of class DFRobot_IICSerial
  *
  * @copyright   Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
- * @licence     The MIT License (MIT)
+ * @license     The MIT License (MIT)
  * @author [Arya](xue.peng@dfrobot.com)
  * @version  V1.0
  * @date  2019-07-28
@@ -11,6 +11,42 @@
  */
 #include <Arduino.h>
 #include <DFRobot_IICSerial.h>
+
+/**
+ * @brief Global register
+ */
+#define REG_WK2132_GENA   0x00   //< Global control register, control sub UART clock 
+#define REG_WK2132_GRST   0x01   //< Global sub UART reset register, reset a sub UART independently through software
+#define REG_WK2132_GMUT   0x02   //< Global main UART control register, and will be used only when the main UART is selected as UART, no need to be set here.
+#define REG_WK2132_GIER   0x10   //< Global interrupt register, control sub UART total interrupt.
+#define REG_WK2132_GIFR   0x11   //< Global interrupt flag register, only-read register: indicate if there is a interrupt occuring on a sub UART.
+
+/**
+ * @brief Page control register
+ */
+#define REG_WK2132_SPAGE  0x03   //< sub UART page control register
+
+/**
+ * @brief sub UART register SPAGE0
+ */
+#define REG_WK2132_SCR    0x04   //< Sub UART control register
+#define REG_WK2132_LCR    0x05   //< Sub UART configuration register
+#define REG_WK2132_FCR    0x06   //< Sub UART FIFO control register
+#define REG_WK2132_SIER   0x07   //< Sub UART interrupt enable register
+#define REG_WK2132_SIFR   0x08   //< Sub UART interrupt flag register 
+#define REG_WK2132_TFCNT  0x09   //< Sub UART transmit FIFO register, OR register
+#define REG_WK2132_RFCNT  0x0A   //< Sub UART transmit FIFO register, OR register 
+#define REG_WK2132_FSR    0x0B   //< Sub UART FIFO register, OR register 
+#define REG_WK2132_LSR    0x0C   //< Sub UART receive register, OR register 
+#define REG_WK2132_FDAT   0x0D   //< Sub UART FIFO data register 
+/**
+ * @brief Sub UART register SPAGE1
+ */
+#define REG_WK2132_BAUD1  0x04   //< Sub UART band rate configuration register high byte
+#define REG_WK2132_BAUD0  0x05   //< Sub UART band rate configuration register low byte
+#define REG_WK2132_PRES   0x06   //< Sub UART band rate configuration register decimal part
+#define REG_WK2132_RFTL   0x07   //< Sub UART receive FIFO interrupt trigger configuration register
+#define REG_WK2132_TFTL   0x08   //< Sub UART transmit FIFO interrupt trigger configuration register
 
 DFRobot_IICSerial::DFRobot_IICSerial(TwoWire &wire,  uint8_t subUartChannel, uint8_t IA1, uint8_t IA0){
   _pWire = &wire;

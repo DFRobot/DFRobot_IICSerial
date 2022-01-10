@@ -5,11 +5,10 @@
  * @n and then read the data from FIFO of RX, and print the content, by which to realize to auto receive or transmit array via UART.
  *
  * @copyright   Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
- * @licence     The MIT License (MIT)
+ * @license     The MIT License (MIT)
  * @author [Arya](xue.peng@dfrobot.com)
  * @version  V1.0
  * @date  2019-07-28
- * @get from https://www.dfrobot.com
  * @url https://github.com/DFRobot/DFRobot_IICSerial
  */
 #include <DFRobot_IICSerial.h>
