@@ -35,6 +35,10 @@
 #define DBG(...)
 #endif
 
+#if !defined(IICSERIAL_FLUSH_TIMEOUT)
+#define IICSERIAL_FLUSH_TIMEOUT 8
+#endif
+
 #if !defined(SERIAL_RX_BUFFER_SIZE)
 #if ((RAMEND - RAMSTART) < 1023)
 #define SERIAL_RX_BUFFER_SIZE 16
