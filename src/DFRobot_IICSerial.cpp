@@ -50,7 +50,7 @@
 
 DFRobot_IICSerial::DFRobot_IICSerial(TwoWire &wire,  uint8_t subUartChannel, uint8_t IA1, uint8_t IA0){
   _pWire = &wire;
-  _addr = (IA1 << 6) | (IA0 << 5) | IIC_ADDR_FIXED;
+  _addr = (IA1 << 6) | (IA0 << 5) | DFROBOT_IICSERIAL_IIC_ADDR_FIXED;
   _subSerialChannel = subUartChannel;
   _rx_buffer_head = 0;
   _rx_buffer_tail = 0;
@@ -68,12 +68,12 @@ int DFRobot_IICSerial::begin(long unsigned baud, uint8_t format, eCommunicationM
   uint8_t channel = subSerialChnnlSwitch(SUBUART_CHANNEL_1);
   if(readReg(REG_WK2132_GENA, &val, 1) != 1){
       DBG("READ BYTEERROR!");
-      return ERR_READ;
+      return DFROBOT_IICSERIAL_ERR_READ;
   }
 #ifndef ARDUINO_ARCH_NRF5
   if((val & 0x80) == 0){
       DBG("Read REG_WK2132_GENA  ERROR!");
-      return ERR_REGDATA;
+      return DFROBOT_IICSERIAL_ERR_REGDATA;
   }
 #endif
   subSerialChnnlSwitch(channel);
@@ -81,7 +81,7 @@ int DFRobot_IICSerial::begin(long unsigned baud, uint8_t format, eCommunicationM
   DBG("OK");
   setSubSerialBaudRate(baud);
   setSubSerialConfigReg(format, mode, opt);
-  return ERR_OK;
+  return DFROBOT_IICSERIAL_ERR_OK;
 }
 
 void DFRobot_IICSerial::end(){
@@ -302,8 +302,8 @@ void DFRobot_IICSerial::setSubSerialBaudRate(unsigned long baud){
   readReg(REG_WK2132_SCR, &scr, 1);
   subSerialRegConfig(REG_WK2132_SCR, &clear);
   uint8_t baud1 = 0,baud0 = 0, baudPres = 0;
-  uint16_t valIntger  = FOSC/(baud * 16) - 1;
-  uint16_t valDecimal = (FOSC%(baud * 16))/(baud * 16); 
+  uint16_t valIntger  = DFROBOT_IICSERIAL_FOSC/(baud * 16) - 1;
+  uint16_t valDecimal = (DFROBOT_IICSERIAL_FOSC%(baud * 16))/(baud * 16); 
   baud1 = (uint8_t)(valIntger >> 8);
   baud0 = (uint8_t)(valIntger & 0x00ff);
   while(valDecimal > 0x0A){
@@ -329,7 +329,7 @@ void DFRobot_IICSerial::setSubSerialConfigReg(uint8_t format, eCommunicationMode
   uint8_t _mode = (uint8_t)mode;
   uint8_t _opt = (uint8_t)opt;
   uint8_t val = 0;
-  _addr = updateAddr(_addr, _subSerialChannel, OBJECT_REGISTER);
+  _addr = updateAddr(_addr, _subSerialChannel, DFROBOT_IICSERIAL_OBJECT_REGISTER);
   if(readReg(REG_WK2132_LCR, &val, 1) != 1){
       DBG("Read Byte ERROR！");
       return;
@@ -372,7 +372,7 @@ void DFRobot_IICSerial::writeReg(uint8_t reg, const void* pBuf, size_t size){
   if(pBuf == NULL){
       DBG("pBuf ERROR!! : null pointer");
   }
-  _addr = updateAddr(_addr, _subSerialChannel, OBJECT_REGISTER);
+  _addr = updateAddr(_addr, _subSerialChannel, DFROBOT_IICSERIAL_OBJECT_REGISTER);
   uint8_t * _pBuf = (uint8_t *)pBuf;
   _pWire->beginTransmission(_addr);
   _pWire->write(&reg, 1);
@@ -388,7 +388,7 @@ uint8_t DFRobot_IICSerial::readReg(uint8_t reg, void* pBuf, size_t size){
     DBG("pBuf ERROR!! : null pointer");
     return 0;
   }
-  _addr = updateAddr(_addr, _subSerialChannel, OBJECT_REGISTER);
+  _addr = updateAddr(_addr, _subSerialChannel, DFROBOT_IICSERIAL_OBJECT_REGISTER);
   uint8_t * _pBuf = (uint8_t *)pBuf;
   _addr &= 0xFE;
   _pWire->beginTransmission(_addr);
@@ -408,11 +408,11 @@ uint8_t DFRobot_IICSerial::readFIFO(void* pBuf, size_t size){
     DBG("pBuf ERROR!! : null pointer");
     return 0;
   }
-  _addr = updateAddr(_addr, _subSerialChannel, OBJECT_FIFO);
+  _addr = updateAddr(_addr, _subSerialChannel, DFROBOT_IICSERIAL_OBJECT_FIFO);
   uint8_t *_pBuf = (uint8_t *)pBuf;
   size_t left = size,num = 0;
   while(left){
-      num = (left > IIC_BUFFER_SIZE) ?  IIC_BUFFER_SIZE : left;
+      num = (left > DFROBOT_IICSERIAL_IIC_BUFFER_SIZE) ?  DFROBOT_IICSERIAL_IIC_BUFFER_SIZE : left;
       _pWire->beginTransmission(_addr);
       if(_pWire->endTransmission() != 0){
           return 0;
@@ -431,11 +431,11 @@ void DFRobot_IICSerial::writeFIFO(void *pBuf, size_t size){
       DBG("pBuf ERROR!! : null pointer");
       return;
   }
-  _addr = updateAddr(_addr, _subSerialChannel, OBJECT_FIFO);
+  _addr = updateAddr(_addr, _subSerialChannel, DFROBOT_IICSERIAL_OBJECT_FIFO);
   uint8_t *_pBuf = (uint8_t *)pBuf;
   size_t left = size;
   while(left){
-      size = (left > IIC_BUFFER_SIZE) ? IIC_BUFFER_SIZE: left;
+      size = (left > DFROBOT_IICSERIAL_IIC_BUFFER_SIZE) ? DFROBOT_IICSERIAL_IIC_BUFFER_SIZE: left;
       _pWire->beginTransmission(_addr);
       _pWire->write(_pBuf, size);
       if(_pWire->endTransmission() != 0){

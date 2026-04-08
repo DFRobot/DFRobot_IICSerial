@@ -74,17 +74,17 @@ class DFRobot_IIC_Serial:
   ## All sub channels   
   SUBUART_CHANNEL_ALL = 0x11 
   ## The 4th and 3rd bits of IIC address are fixed, value 1 and 0 respectively   
-  IIC_ADDR_FIXED      = 0x10   
+  DFROBOT_IICSERIAL_IIC_ADDR_FIXED      = 0x10   
   
   SERIAL_RX_BUFFER_SIZE = 32
-  IIC_BUFFER_SIZE = 64
+  DFROBOT_IICSERIAL_IIC_BUFFER_SIZE = 64
   
-  ERR_OK           =    0
-  ERR_REGDATA      =   -1
-  ERR_READ         =   -2
-  FOSC             =   14745600 #External cystal frequency 14.7456MHz
-  OBJECT_REGISTER  =   0x00      #Register object 
-  OBJECT_FIFO      =   0x01      #FIFO buffer object 
+  DFROBOT_IICSERIAL_ERR_OK           =    0
+  DFROBOT_IICSERIAL_ERR_REGDATA      =   -1
+  DFROBOT_IICSERIAL_ERR_READ         =   -2
+  DFROBOT_IICSERIAL_FOSC             =   14745600 #External cystal frequency 14.7456MHz
+  DFROBOT_IICSERIAL_OBJECT_REGISTER  =   0x00      #Register object 
+  DFROBOT_IICSERIAL_OBJECT_FIFO      =   0x01      #FIFO buffer object 
   
   
   '''
@@ -172,7 +172,7 @@ class DFRobot_IIC_Serial:
       @n The values of the 2nd and 1st bits are the sub UART channels, 00 for sub UART 1, 01 for sub UART 2. 
       @n The 0 bit represents the operation object: 0 for register, 1 for FIFO cache.
     '''
-    self._addr = (IA1 << 6) | (IA0 << 5) | self.IIC_ADDR_FIXED
+    self._addr = (IA1 << 6) | (IA0 << 5) | self.DFROBOT_IICSERIAL_IIC_ADDR_FIXED
     self._sub_serial_channel = sub_uart_channel
     self._rx_buffer_head = 0
     self._rx_buffer_tail = 0
@@ -361,16 +361,16 @@ class DFRobot_IIC_Serial:
     
     if len(l) != 1:
       print("READ BYTE ERROR!")
-      return self.ERR_READ
+      return self.DFROBOT_IICSERIAL_ERR_READ
 
     if l[0] & 0x80 == 0:
       print("Read REG_WK2132_GENA  ERROR!")
-      return self.ERR_REGDATA
+      return self.DFROBOT_IICSERIAL_ERR_REGDATA
     self._sub_serial_channel_switch(channel)
     self._sub_serial_config(self._sub_serial_channel)
     self._set_sub_serial_baudrate(baud)
     self._set_sub_serial_config_reg(format, mode, opt)
-    return self.ERR_OK
+    return self.DFROBOT_IICSERIAL_ERR_OK
 
   def _sub_serial_config(self, sub_uart_channel):
     self._sub_serial_global_reg_enable(sub_uart_channel, 0)
@@ -450,8 +450,8 @@ class DFRobot_IIC_Serial:
     baud1 = 0
     baud0 = 0
     baud_pres = 0
-    val_intger =  self.FOSC//(baud * 16) - 1
-    val_decimal = (self.FOSC%(baud * 16))//(baud * 16)
+    val_intger =  self.DFROBOT_IICSERIAL_FOSC//(baud * 16) - 1
+    val_decimal = (self.DFROBOT_IICSERIAL_FOSC%(baud * 16))//(baud * 16)
     type(val_intger)
     type(val_decimal)
     baud1 = (val_intger >> 8)&0xff
@@ -469,7 +469,7 @@ class DFRobot_IIC_Serial:
     self._sub_serial_reg_config(self.REG_WK2132_SCR, scr[0])
 
   def _set_sub_serial_config_reg(self, format, mode, opt):
-    self._addr = self._update_addr(self._addr, self._sub_serial_channel, self.OBJECT_REGISTER)
+    self._addr = self._update_addr(self._addr, self._sub_serial_channel, self.DFROBOT_IICSERIAL_OBJECT_REGISTER)
     l = self._read_bytes(self.REG_WK2132_LCR, 1)
     if len(l) != 1:
       print("READ BYTE ERROR!")
@@ -496,7 +496,7 @@ class DFRobot_IIC_Serial:
       @param buf Store buffer list for the data to be write
     '''
     self.last_operate_status = self.STA_ERR_DEVICE_NOT_DETECTED
-    self._addr = self._update_addr(self._addr, self._sub_serial_channel, self.OBJECT_REGISTER)
+    self._addr = self._update_addr(self._addr, self._sub_serial_channel, self.DFROBOT_IICSERIAL_OBJECT_REGISTER)
     try:
       self._bus.write_i2c_block_data(self._addr, reg, buf)
       self.last_operate_status = self.STA_OK
@@ -515,7 +515,7 @@ class DFRobot_IIC_Serial:
       @return Return list of data
     '''
     self.last_operate_status = self.STA_ERR_DEVICE_NOT_DETECTED
-    self._addr = self._update_addr(self._addr, self._sub_serial_channel, self.OBJECT_REGISTER)
+    self._addr = self._update_addr(self._addr, self._sub_serial_channel, self.DFROBOT_IICSERIAL_OBJECT_REGISTER)
     self._addr = self._addr & 0xFE
     try:
       rslt = self._bus.read_i2c_block_data(self._addr, reg, len1)

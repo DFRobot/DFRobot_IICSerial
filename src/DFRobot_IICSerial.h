@@ -71,20 +71,20 @@ public:
   #define SUBUART_CHANNEL_1    0x00    //< Sub UART channel1
   #define SUBUART_CHANNEL_2    0x01    //< Sub UART channel2
   #define SUBUART_CHANNEL_ALL  0x11    //< All sub channels
-  #define IIC_ADDR_FIXED       0x10    //< The 4th and 3rd bits of IIC address are fixed, value 1 and 0 respectively 
+  #define DFROBOT_IICSERIAL_IIC_ADDR_FIXED       0x10    //< The 4th and 3rd bits of IIC address are fixed, value 1 and 0 respectively 
 
-  #define ERR_OK                0
-  #define ERR_REGDATA          -1
-  #define ERR_READ             -2
-  #define FOSC                 14745600L//< External cystal frequency 14.7456MHz
-  #define OBJECT_REGISTER      0x00     //< Register object 
-  #define OBJECT_FIFO          0x01     //< FIFO buffer object 
+  #define DFROBOT_IICSERIAL_ERR_OK                0
+  #define DFROBOT_IICSERIAL_ERR_REGDATA          -1
+  #define DFROBOT_IICSERIAL_ERR_READ             -2
+  #define DFROBOT_IICSERIAL_FOSC                 14745600L//< External cystal frequency 14.7456MHz
+  #define DFROBOT_IICSERIAL_OBJECT_REGISTER      0x00     //< Register object 
+  #define DFROBOT_IICSERIAL_OBJECT_FIFO          0x01     //< FIFO buffer object 
 #ifdef ARDUINO_ARCH_NRF5
-  #define IIC_BUFFER_SIZE      63       //< micro:bit IIC can transmit at most 63 bytes each time 
+  #define DFROBOT_IICSERIAL_IIC_BUFFER_SIZE      63       //< micro:bit IIC can transmit at most 63 bytes each time 
 #elif ARDUINO_ARCH_MPYTHON
-  #define IIC_BUFFER_SIZE      31       //< mPython IIC can transmit at most 31 bytes each time 
+  #define DFROBOT_IICSERIAL_IIC_BUFFER_SIZE      31       //< mPython IIC can transmit at most 31 bytes each time 
 #else
-  #define IIC_BUFFER_SIZE      32       //< UNO, Mega2560, Leonardo(AVR series), IIC can transmit at most 32 bytes each time
+  #define DFROBOT_IICSERIAL_IIC_BUFFER_SIZE      32       //< UNO, Mega2560, Leonardo(AVR series), IIC can transmit at most 32 bytes each time
 #endif
 
   typedef enum{
@@ -411,7 +411,7 @@ protected:
    * @brief Update module IIC address before starting communication
    * @param pre The first 5 bits of IIC address, transfered from constructor DFRobot_WK2132
    * @param subUartChannel Sub UART channel: SUBUART_CHANNEL_1 or SUBUART_CHANNEL_2
-   * @param obj Object to be operated: register or FIFO, fill as OBJECT_REGISTER or OBJECT_FIFO
+   * @param obj Object to be operated: register or FIFO, fill as DFROBOT_IICSERIAL_OBJECT_REGISTER or DFROBOT_IICSERIAL_OBJECT_FIFO
    * @return Return 8-bits IIC address
    */
   uint8_t updateAddr(uint8_t pre, uint8_t subUartChannel, uint8_t obj);

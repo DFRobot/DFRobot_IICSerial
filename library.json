@@ -1,0 +1,34 @@
+{
+    "name": "DFRobot_IICSerial",
+    "version": "1.0.2",
+    "description": "This is an IIC to dual UART module library.",
+    "keywords": [
+        "I2C",
+        "UART",
+        "serial",
+        "communication"
+    ],
+    "authors": [
+        {
+            "name": "DFRobot"
+        },
+        {
+            "name": "Arya",
+            "email": "xue.peng@dfrobot.com",
+            "maintainer": true
+        },
+        {
+            "name": "kkfranco98",
+            "url": "https://github.com/kkfranco98"
+        }
+    ],
+    "license": "MIT",
+    "frameworks": [
+        "arduino"
+    ],
+    "platforms": "*",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/DFRobot/DFRobot_IICSerial"
+    }
+}
