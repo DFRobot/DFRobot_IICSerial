@@ -154,6 +154,7 @@ micro:bit        |      √       |              |             |
 ## History
 
 - 2019/08/07 - Version 1.0.0 released.
+- 2026/10/22 - Version 1.0.3 released. read(pBuf, size) now reads at most size bytes, fixing a buffer overflow.
 
 ## Credits
 
