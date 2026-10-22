@@ -180,10 +180,15 @@ size_t DFRobot_IICSerial::read(void *pBuf, size_t size){
     return 0;
   }
   uint8_t *_pBuf = (uint8_t *)pBuf;
-  size = available() - (((unsigned int)(SERIAL_RX_BUFFER_SIZE + _rx_buffer_head - _rx_buffer_tail)) % SERIAL_RX_BUFFER_SIZE);
-  readFIFO(_pBuf, size);
-  return size;
+  size_t availableBytes = available() - (
+    ((unsigned int)(SERIAL_RX_BUFFER_SIZE + _rx_buffer_head - _rx_buffer_tail))
+    % SERIAL_RX_BUFFER_SIZE
+  );
+  size_t toRead = (availableBytes < size) ? availableBytes : size;
+  readFIFO(_pBuf, toRead);
+  return toRead;
 }
+
 void DFRobot_IICSerial::flush(void){
   sFsrReg_t fsr = readFIFOStateReg();
   while(fsr.tDat == 1);
