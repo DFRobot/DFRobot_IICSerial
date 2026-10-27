@@ -35,8 +35,8 @@
 #define DBG(...)
 #endif
 
-#if !defined(IICSERIAL_FLUSH_TIMEOUT)
-#define IICSERIAL_FLUSH_TIMEOUT 8
+#if !defined(IICSERIAL_FLUSH_TIMEOUT_MS)
+#define IICSERIAL_FLUSH_TIMEOUT_MS 1000
 #endif
 
 #if !defined(SERIAL_RX_BUFFER_SIZE)
