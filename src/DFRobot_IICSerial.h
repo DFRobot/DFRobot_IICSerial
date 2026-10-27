@@ -48,6 +48,10 @@ typedef uint16_t rx_buffer_index_t;
 typedef uint8_t rx_buffer_index_t;
 #endif
 
+#if !defined(SERIAL_FLUSH_TIMEOUT_MS)
+#define SERIAL_FLUSH_TIMEOUT_MS 1000
+#endif
+
 #ifdef ARDUINO_ARCH_NRF5
 class DFRobot_IICSerial : public _Stream{
 #else
