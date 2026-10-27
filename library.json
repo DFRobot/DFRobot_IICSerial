@@ -1,6 +1,6 @@
 {
     "name": "DFRobot_IICSerial",
-    "version": "1.0.2",
+    "version": "1.0.4",
     "description": "This is an IIC to dual UART module library.",
     "keywords": [
         "I2C",
