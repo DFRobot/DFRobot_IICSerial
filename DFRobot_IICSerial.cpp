@@ -185,13 +185,14 @@ size_t DFRobot_IICSerial::read(void *pBuf, size_t size){
   return size;
 }
 void DFRobot_IICSerial::flush(void){
-  uint32_t start = millis();
-  while (millis() - start < IICSERIAL_FLUSH_TIMEOUT) {
-    sFsrReg_t fsr = readFIFOStateReg();
-    if (fsr.tDat != 1) {
-      break;
-    }
+uint32_t start = millis();
+while (millis() - start < IICSERIAL_FLUSH_TIMEOUT_MS) {
+  sfSrReg_t fsr = readFIFOStateReg();
+  if (fsr.tDat != 1) {
+    break;
   }
+  delay(5);
+}
 }
 
 
